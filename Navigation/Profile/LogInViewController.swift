@@ -40,7 +40,12 @@ class LogInViewController: UIViewController {
         field.borderStyle = .roundedRect
         field.textColor = .black
         field.tintColor = UIColor(named: "colorVk")
-        field.backgroundColor = .systemGray6
+        if #available(iOS 13.0, *) {
+            field.backgroundColor = .systemGray6
+        } else {
+            // Fallback on earlier versions
+            field.backgroundColor = UIColor(named: "appSystemGray6")
+        }
         
         field.layer.masksToBounds = true
         field.placeholder = "Email or phone"
@@ -60,7 +65,12 @@ class LogInViewController: UIViewController {
         field.borderStyle = .roundedRect
         field.textColor = .black
         field.tintColor = UIColor(named: "colorVk")
-        field.backgroundColor = .systemGray6
+        if #available(iOS 13.0, *) {
+            field.backgroundColor = .systemGray6
+        } else {
+            // Fallback on earlier versions
+            field.backgroundColor = UIColor(named: "appSystemGray6")
+        }
         
         field.layer.masksToBounds = true
         field.placeholder = "Password"

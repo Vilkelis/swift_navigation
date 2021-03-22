@@ -47,8 +47,16 @@ class PhotosTableViewCell: UITableViewCell {
     
     let toCatalogButton: UIButton = {
         let button = UIButton()
-        let fontConfig = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 24))
-        button.setImage(UIImage(systemName: "arrow.right", withConfiguration: fontConfig) , for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 24)
+        if #available(iOS 13.0, *) {
+            let fontConfig = UIImage.SymbolConfiguration(font: .systemFont(ofSize: 24))
+            button.setImage(UIImage(systemName: "arrow.right", withConfiguration: fontConfig) , for: .normal)
+        } else {
+            // Fallback on earlier versions
+            button.setImage(UIImage(named: "appArrowRight") , for: .normal)
+       //     button.imageView?.contentMode = .scaleAspectFit
+         //   button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        }
         button.tintColor = .black
         button.translatesAutoresizingMaskIntoConstraints = false       
         return button
