@@ -15,11 +15,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Закончили загрузку приложения
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        print("RUN: \(#function)")
         window = UIWindow(frame: UIScreen.main.bounds)
         window!.rootViewController = TabBarViewController()
         window!.makeKeyAndVisible()
         
         return true
     }
+        
+    // Становится не активным
+    func applicationWillResignActive(_ application: UIApplication) {
+        print("RUN: \(#function)")
+    }
+    
+    // Перешли в бэкграунд
+    // Тест на эмуляторе показал: Выполнялось все 174.97919690608978 секунд.
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        print("RUN: \(#function)")
+        BackgroundTest().run()
+    }
+    
+    // Выходим из бэкграунд
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        print("RUN: \(#function)")
+    }
+    
+    // Приложение запущено и работает
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        print("RUN: \(#function)")
+    }
+    
+    // Приложение будет прервано
+    func applicationWillTerminate(_ application: UIApplication) {
+        print("RUN: \(#function)" )
+        print("Background time remaining = " +
+            "\(UIApplication.shared.backgroundTimeRemaining) seconds")
+    }
 }
-
