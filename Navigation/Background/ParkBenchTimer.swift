@@ -6,26 +6,26 @@
 //  Copyright © 2021 Artem Novichkov. All rights reserved.
 //
 
-import CoreFoundation
+import UIKit
 
 class ParkBenchTimer {
 
-    let startTime:CFAbsoluteTime
-    var endTime:CFAbsoluteTime?
+    let startTime:Date
+    var endTime:Date?
 
     init() {
-        startTime = CFAbsoluteTimeGetCurrent()
+        startTime = Date()
     }
 
-    func stop() -> CFAbsoluteTime {
-        endTime = CFAbsoluteTimeGetCurrent()
+    func stop() -> TimeInterval {
+        endTime = Date()
 
         return duration!
     }
 
-    var duration:CFAbsoluteTime? {
+    var duration:TimeInterval? {
         if let endTime = endTime {
-            return endTime - startTime
+            return DateInterval.init(start: startTime, end: endTime).duration
         } else {
             return nil
         }
