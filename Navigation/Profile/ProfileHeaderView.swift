@@ -84,7 +84,12 @@ class ProfileHeaderView: UIView {
     // MARK: - Initializators
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .systemGray6
+        if #available(iOS 13.0, *) {
+            self.backgroundColor = .systemGray6
+        } else {
+            // Fallback on earlier versions
+            self.backgroundColor = UIColor(named: "appSystemGray6")
+        }
         image.image = UIImage(named: "hipster_cat")
         titleLabel.text = "Hipster cat"
         statusLabel.text = self.statusText

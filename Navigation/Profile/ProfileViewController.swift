@@ -16,7 +16,12 @@ class ProfileViewController: UIViewController, ImageViewZoomableDelegate {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.backgroundColor = .systemGray6
+        if #available(iOS 13.0, *) {
+            tableView.backgroundColor = .systemGray6
+        } else {
+            // Fallback on earlier versions
+            tableView.backgroundColor = UIColor(named: "appSystemGray6")
+        }
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: String(describing: PhotosTableViewCell.self))
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
         tableView.register(PostTableHeaderView.self, forHeaderFooterViewReuseIdentifier: String(describing: PostTableHeaderView.self))
@@ -76,10 +81,19 @@ class ProfileViewController: UIViewController, ImageViewZoomableDelegate {
             
             let buttonSize = 50
             buttonImageZoomOut = UIButton()
-            let fontConfig = UIImage.SymbolConfiguration(font: .systemFont(ofSize: CGFloat(buttonSize), weight: .bold))
-            buttonImageZoomOut!.setImage(UIImage(systemName: "multiply", withConfiguration: fontConfig) , for: .normal)
-            buttonImageZoomOut!.setImage(UIImage(systemName: "multiply", withConfiguration: fontConfig) , for: .focused)
-            buttonImageZoomOut!.setImage(UIImage(systemName: "multiply", withConfiguration: fontConfig) , for: .highlighted)
+            if #available(iOS 13.0, *) {
+                let fontConfig = UIImage.SymbolConfiguration(font: .systemFont(ofSize: CGFloat(buttonSize), weight: .bold))
+                buttonImageZoomOut!.setImage(UIImage(systemName: "multiply", withConfiguration: fontConfig) , for: .normal)
+                buttonImageZoomOut!.setImage(UIImage(systemName: "multiply", withConfiguration: fontConfig) , for: .focused)
+                buttonImageZoomOut!.setImage(UIImage(systemName: "multiply", withConfiguration: fontConfig) , for: .highlighted)
+            } else {
+                // Fallback on earlier versions
+                buttonImageZoomOut!.titleLabel?.font = .systemFont(ofSize: CGFloat(buttonSize))
+                buttonImageZoomOut!.setImage(UIImage(named: "appMultiply") , for: .normal)
+                buttonImageZoomOut!.setImage(UIImage(named: "appMultiply") , for: .focused)
+                buttonImageZoomOut!.setImage(UIImage(named: "appMultiply") , for: .highlighted)
+            }
+ 
             buttonImageZoomOut!.tintColor = .white
             buttonImageZoomOut!.translatesAutoresizingMaskIntoConstraints = false
             buttonImageZoomOut!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomOutImageView)))

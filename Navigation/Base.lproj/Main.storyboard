@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VVa-ty-c3K">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -26,26 +26,9 @@
             <point key="canvasLocation" x="2643" y="159"/>
         </scene>
         <!--Feed-->
-        <scene sceneID="pR1-4r-6ob">
-            <objects>
-                <navigationController id="vyo-r6-qwt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Feed" image="house.fill" catalog="system" id="0HN-zR-0uF"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jwt-CW-Jdi">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="UOy-8g-tjm" kind="relationship" relationship="rootViewController" id="g6E-pk-jmA"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mxn-0X-Agz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-142" y="-541"/>
-        </scene>
-        <!--Feed-->
         <scene sceneID="bye-GP-P6Y">
             <objects>
-                <viewController id="UOy-8g-tjm" customClass="FeedViewController" customModule="Navigation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="feedViewController" id="UOy-8g-tjm" customClass="FeedViewController" customModule="Navigation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hnQ-fB-PJI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,9 +57,9 @@
         <!--Post-->
         <scene sceneID="9oM-mS-hYy">
             <objects>
-                <viewController id="Gpo-I4-SnC" customClass="PostViewController" customModule="Navigation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="postViewController" id="Gpo-I4-SnC" customClass="PostViewController" customModule="Navigation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NJr-hs-eEz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="qcf-0q-WgP"/>
                         <color key="backgroundColor" systemColor="systemPinkColor"/>
@@ -96,7 +79,7 @@
         <!--Info View Controller-->
         <scene sceneID="4aZ-7w-8te">
             <objects>
-                <viewController id="A8n-Iq-F5E" customClass="InfoViewController" customModule="Navigation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="infoViewController" id="A8n-Iq-F5E" customClass="InfoViewController" customModule="Navigation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CyQ-kq-0CI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -137,48 +120,8 @@
             </objects>
             <point key="canvasLocation" x="1004" y="197"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="0O8-tr-oe2">
-            <objects>
-                <tabBarController id="VVa-ty-c3K" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fGo-88-qdc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="vyo-r6-qwt" kind="relationship" relationship="viewControllers" id="hck-4Z-BVs"/>
-                        <segue destination="lWj-Ic-cCh" kind="relationship" relationship="viewControllers" id="xoH-eH-KBA"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kqe-LH-kso" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1059" y="-128"/>
-        </scene>
-        <!--Profile-->
-        <scene sceneID="NxV-Wk-gIN">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lWj-Ic-cCh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="SyK-iK-f7q"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hZv-O1-ero">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="ZIA-ge-5TB" kind="relationship" relationship="rootViewController" id="fvW-8I-9dI"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y8b-38-THj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-142.02898550724638" y="196.875"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="house.fill" catalog="system" width="128" height="106"/>
-        <image name="multiply" catalog="system" width="128" height="111"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
