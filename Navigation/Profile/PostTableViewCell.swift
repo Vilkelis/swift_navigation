@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class PostTableViewCell: UITableViewCell {
     
@@ -78,30 +79,36 @@ class PostTableViewCell: UITableViewCell {
         [authorLabel, imageImage, descriptionLabel, likesLabel, viewsLabel].forEach {
             contentView.addSubview($0)
         }
-        
-        authorLabel.setContentHuggingPriority(.defaultLow - 1, for: .vertical)
- 
-        let constraints = [
-            authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
-            imageImage.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 12),
-            imageImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageImage.heightAnchor.constraint(equalTo: imageImage.widthAnchor),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: imageImage.bottomAnchor, constant: 16),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
-            likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            likesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
-            viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            contentView.bottomAnchor.constraint(equalTo: viewsLabel.bottomAnchor, constant: 16)
-        ]
-        NSLayoutConstraint.activate(constraints)
+
+        authorLabel.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(contentView).offset(16)
+            make.leading.equalTo(contentView).offset(16)
+            make.trailing.equalTo(contentView).offset(-16)
+        }
+
+        imageImage.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(authorLabel.snp_bottom).offset(12)
+            make.leading.equalTo(contentView)
+            make.trailing.equalTo(contentView)
+            make.height.equalTo(imageImage.snp_width)
+        }
+
+        descriptionLabel.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(imageImage.snp_bottom).offset(16)
+            make.leading.equalTo(contentView).offset(16)
+            make.trailing.equalTo(contentView).offset(-16)
+        }
+
+        likesLabel.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(descriptionLabel.snp_bottom).offset(16)
+            make.leading.equalTo(contentView).offset(16)
+        }
+
+        viewsLabel.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(descriptionLabel.snp_bottom).offset(16)
+            make.trailing.equalTo(contentView).offset(-16)
+            make.bottom.equalTo(contentView).offset(-16)
+        }
+
     }
 }

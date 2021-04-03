@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileViewController: UIViewController, ImageViewZoomableDelegate {
     
@@ -36,13 +37,9 @@ class ProfileViewController: UIViewController, ImageViewZoomableDelegate {
     func setupViews() {
         view.addSubview(tableView)
         
-        let constraints = [
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ]
-        NSLayoutConstraint.activate(constraints)
+        tableView.snp.makeConstraints { (make) -> Void in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,15 +100,14 @@ class ProfileViewController: UIViewController, ImageViewZoomableDelegate {
             keyWindow.addSubview(zoomImage!)
             keyWindow.addSubview(buttonImageZoomOut!)
             
-            let constraints = [
-                backgroudView!.topAnchor.constraint(equalTo: keyWindow.topAnchor),
-                backgroudView!.bottomAnchor.constraint(equalTo: keyWindow.bottomAnchor),
-                backgroudView!.leadingAnchor.constraint(equalTo: keyWindow.leadingAnchor),
-                backgroudView!.trailingAnchor.constraint(equalTo: keyWindow.trailingAnchor),
-                buttonImageZoomOut!.topAnchor.constraint(equalTo: keyWindow.topAnchor, constant: 10),
-                buttonImageZoomOut!.trailingAnchor.constraint(equalTo: keyWindow.trailingAnchor, constant: -10)
-            ]
-            NSLayoutConstraint.activate(constraints)
+            backgroudView!.snp.makeConstraints { (make) -> Void in
+                make.edges.equalTo(keyWindow)
+            }
+            
+            buttonImageZoomOut!.snp.makeConstraints { (make) -> Void in
+                make.top.equalTo(keyWindow).offset(10)
+                make.trailing.equalTo(keyWindow).offset(-10)
+            }
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.backgroudView?.alpha = 0.8
@@ -120,13 +116,12 @@ class ProfileViewController: UIViewController, ImageViewZoomableDelegate {
                 self.zoomImage!.layer.cornerRadius = self.zoomImage!.frame.height / 2
             }, completion: { _ in
                 self.zoomImage!.translatesAutoresizingMaskIntoConstraints = false
-                let constraints = [
-                    self.zoomImage!.widthAnchor.constraint(equalTo: keyWindow.widthAnchor),
-                    self.zoomImage!.heightAnchor.constraint(equalTo: keyWindow.widthAnchor, multiplier: self.imageProportionCoef),
-                    self.zoomImage!.centerYAnchor.constraint(equalTo: keyWindow.centerYAnchor),
-                    self.zoomImage!.centerXAnchor.constraint(equalTo: keyWindow.centerXAnchor)
-                ]
-                NSLayoutConstraint.activate(constraints)
+                self.zoomImage!.snp.makeConstraints { (make) -> Void in
+                    make.width.equalTo(keyWindow)
+                    make.height.equalTo(keyWindow.snp_width).multipliedBy(self.imageProportionCoef)
+                    make.centerY.equalTo(keyWindow)
+                    make.centerX.equalTo(keyWindow)
+                }
                 
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                     self.buttonImageZoomOut!.alpha = 1

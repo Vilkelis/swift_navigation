@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class PhotosTableViewCell: UITableViewCell {
  
@@ -79,29 +80,31 @@ class PhotosTableViewCell: UITableViewCell {
             let image = createImageView(imageName: "")
             stackView.addArrangedSubview(image)
             
-            image.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1/4, constant: -8*3/4).isActive = true
-            image.heightAnchor.constraint(equalTo: image.widthAnchor).isActive = true
+            image.snp.makeConstraints { (make) -> Void in
+                make.width.equalTo(stackView).multipliedBy(1/4).offset(-8*3/4)
+                make.height.equalTo(image.snp_width)
+            }
         }
-    
+        
         [titleLabel, toCatalogButton, stackView].forEach {
             self.contentView.addSubview($0)
         }
         
-        let constraints = [
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            
-            toCatalogButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            toCatalogButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            
-            stackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            
-            contentView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 12)
-            
-        ]
-        NSLayoutConstraint.activate(constraints)
+        titleLabel.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(contentView).offset(12)
+            make.leading.equalTo(contentView).offset(12)
+        }
+        toCatalogButton.snp.makeConstraints { (make) -> Void in
+            make.centerY.equalTo(titleLabel)
+            make.trailing.equalTo(contentView).offset(-12)
+        }
+        stackView.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(titleLabel.snp_bottom).offset(12)
+            make.leading.equalTo(contentView).offset(12)
+            make.trailing.equalTo(contentView).offset(-12)
+            make.bottom.equalTo(contentView).offset(-12)
+        }
+        
     }
 }
-  
+
