@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class PostTableHeaderView: UITableViewHeaderFooterView {
     
@@ -28,14 +29,9 @@ class PostTableHeaderView: UITableViewHeaderFooterView {
     
     private func setupViews() {
         contentView.backgroundColor = .lightGray
-        
         contentView.addSubview(profileHeaderView)
-        let constraints = [
-            profileHeaderView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            profileHeaderView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            profileHeaderView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            profileHeaderView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ]
-        NSLayoutConstraint.activate(constraints)
+        profileHeaderView.snp.makeConstraints { (make) -> Void in
+            make.edges.equalTo(contentView)
+        }
     }
 }

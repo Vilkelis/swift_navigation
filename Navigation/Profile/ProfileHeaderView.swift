@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol ImageViewZoomableDelegate {
     func performZoomInImageView(_ imageView: UIImageView)
@@ -113,30 +114,39 @@ class ProfileHeaderView: UIView {
         }
         
         let padding: CGFloat = 16.0
-        let constraints = [
-            image.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: padding),
-            image.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: padding),
-            image.widthAnchor.constraint(equalToConstant: 100),
-            image.heightAnchor.constraint(equalToConstant: 100),
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
-            titleLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -padding),
-            titleLabel.heightAnchor.constraint(equalToConstant: 18),
-            statusLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: -18-14),
-            statusLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: padding),
-            statusLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -padding),
-            statusLabel.heightAnchor.constraint(equalToConstant: 14),
-            statusField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: padding),
-            statusField.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: padding),
-            statusField.trailingAnchor.constraint(equalTo: statusLabel.trailingAnchor),
-            statusField.heightAnchor.constraint(equalToConstant: 40),
-            showStatusButton.topAnchor.constraint(equalTo: statusField.bottomAnchor, constant: padding),
-            showStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: padding),
-            showStatusButton.trailingAnchor.constraint(equalTo: statusLabel.trailingAnchor),
-            showStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            self.bottomAnchor.constraint(equalTo: showStatusButton.bottomAnchor, constant: padding)
-        ]
-        NSLayoutConstraint.activate(constraints)
+
+        image.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(padding)
+            make.leading.equalTo(self.safeAreaLayoutGuide).offset(padding)
+            make.width.equalTo(100)
+            make.height.equalTo(100)
+        }
+        titleLabel.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self).offset(27)
+            make.leading.equalTo(image.snp_trailing).offset(padding)
+            make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-padding)
+            make.height.equalTo(18)
+        }
+        statusLabel.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(image.snp_bottom).offset(-18-14)
+            make.leading.equalTo(image.snp_trailing).offset(padding)
+            make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-padding)
+            make.height.equalTo(14)
+        }
+        statusField.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(statusLabel.snp_bottom).offset(padding)
+            make.leading.equalTo(image.snp_trailing).offset(padding)
+            make.trailing.equalTo(statusLabel)
+            make.height.equalTo(40)
+        }
+        showStatusButton.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(statusField.snp_bottom).offset(padding)
+            make.leading.equalTo(self.safeAreaLayoutGuide).offset(padding)
+            make.trailing.equalTo(statusLabel)
+            make.height.equalTo(50)
+            make.bottom.equalTo(self).offset(-padding)
+        }
+        
     }
     
     //MARK: - Events
